@@ -10,14 +10,14 @@ export const useFetch = (url) => {
 			setIsPending(true);
 			try {
 				const res = await fetch(url);
-				if (!res.ok) throw new Error(res.statusText);
+				if (!res.ok) throw new Error(res.status);
 				const json = await res.json();
 				setData(json);
 				setIsPending(false);
 				setError(null);
 			} catch (err) {
 				setIsPending(false);
-				setError("Data can't be fetched");
+				setError(`Data can't be fetched due to ${err.message} error`);
 			}
 		};
 		fetchData();
